@@ -1,0 +1,26 @@
+#jinder-nav .dropdown-toggle {
+  color: black;
+}
+
+#jinder-nav .dropdown-toggle a:hover {
+  color: black;
+}
+
+/* disable undo button */
+._dash-undo-redo {
+   display: none;
+}
+
+/* Use CSS to show "Loading..." - disabled for better styling using dcc.Loading */
+/*
+*[data-dash-is-loading="true"]{
+    visibility: hidden;
+}
+
+*[data-dash-is-loading="true"]::before{
+    content: "Loading...";
+    display: inline-block;
+    color: magenta;
+    visibility: visible;
+}
+*/

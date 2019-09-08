@@ -14,3 +14,8 @@ we have developed a simple job description generation tool that connects to exis
 Small business owners/managers can then submit their job requirements into our tool to generate 
 the optimal job description and ad for their role.
 
+___
+
+The website is written in Python.
+To launch the website, make sure the project's folder name remains the same as 'govhack2019'.
+Run launch_jinder.ipynb via Jupyter Notebook with plotly and dash installed.

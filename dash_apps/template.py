@@ -95,7 +95,9 @@ def _generate_page():
                         value=list(_duties.keys()),
                         multi=True,
                         style={'margin-right': '10px'}
-                    )
+                    ),
+                    _html.P('*Suggestions are based on common descriptions extracted from '
+                            + 'historical posts that received successful job placement.')
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
@@ -123,7 +125,9 @@ def _generate_page():
                         value=list(_skills.keys())[:2],
                         multi=True,
                         style={'margin-right': '10px'}
-                    )
+                    ),
+                    _html.P('*Suggestions are based on common descriptions extracted from '
+                            + 'historical posts that received successful job placement.')
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
@@ -151,7 +155,9 @@ def _generate_page():
                         value=list(_qualifications.keys()),
                         multi=True,
                         style={'margin-right': '10px'}
-                    )
+                    ),
+                    _html.P('*Suggestions are based on common descriptions extracted from '
+                            + 'historical posts that received successful job placement.')
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
@@ -235,6 +241,8 @@ def _generate_page():
                             style={'width': '200px'}
                         ), style={'display': 'inline-block', 'margin-right': '10px'}
                     ),
+                    _html.P('*Suggestion is based on ATO\'s personal income statistics of the selected region '
+                            + 'and industry, adjusted for LMIP\'s regional employment statistics by industry.'),
                 ], style={'display': 'table-cell', 'width': '60%'}),
             ], style={'display': 'table-row', 'width': '100%'}),
             _html.Div(style={'display': 'table-row', 'width': '100%', 'height': '20px'}),
@@ -244,7 +252,7 @@ def _generate_page():
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
-                        placeholder='Enter a value...',
+                        placeholder='(Optional)',
                         value='',
                         style={'width': '100%', 'height': '120px'}
                     )

@@ -58,9 +58,10 @@ def _generate_page():
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Input(
+                        id='job_title',
                         placeholder='Job Title...',
                         type='text',
-                        value='Structures Foreman',
+                        value='',
                         style={'display': 'inline-block', 'width': '100%'},
                     )
                 ], style={'display': 'table-cell', 'width': '60%'}),
@@ -88,11 +89,9 @@ def _generate_page():
             _html.Div([
                 _html.Div([
                     _dcc.Dropdown(
-                        options=[
-                            {'label': duty, 'value': duty}
-                            for duty in _duties.keys()
-                        ],
-                        value=list(_duties.keys()),
+                        id='duty_selector',
+                        options=[],
+                        value='',
                         multi=True,
                         style={'margin-right': '10px'}
                     ),
@@ -101,7 +100,8 @@ def _generate_page():
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
-                        placeholder='Enter a value...',
+                        id='duties',
+                        placeholder='Main Duties / Responsibilities...',
                         value=''.join(_duties.values()),
                         style={'width': '100%', 'height': '120px'}
                     )
@@ -118,11 +118,8 @@ def _generate_page():
                 _html.Div([
                     _dcc.Dropdown(
                         id='skill_selector',
-                        options=[
-                            {'label': skill, 'value': skill}
-                            for skill in _skills.keys()
-                        ],
-                        value=list(_skills.keys())[:2],
+                        options=[],
+                        value='',
                         multi=True,
                         style={'margin-right': '10px'}
                     ),
@@ -132,8 +129,8 @@ def _generate_page():
                 _html.Div([
                     _dcc.Textarea(
                         id='skills',
-                        placeholder='Enter a value...',
-                        value=''.join(list(_skills.values())[:2]),
+                        placeholder='Skills...',
+                        value='',
                         style={'width': '100%', 'height': '120px'}
                     )
                 ], style={'display': 'table-cell', 'width': '60%'}),
@@ -148,11 +145,9 @@ def _generate_page():
             _html.Div([
                 _html.Div([
                     _dcc.Dropdown(
-                        options=[
-                            {'label': qual, 'value': qual}
-                            for qual in _qualifications.keys()
-                        ],
-                        value=list(_qualifications.keys()),
+                        id='qual_selector',
+                        options=[],
+                        value='',
                         multi=True,
                         style={'margin-right': '10px'}
                     ),
@@ -161,8 +156,9 @@ def _generate_page():
                 ], style={'display': 'table-cell', 'width': '40%', 'vertical-align': 'top'}),
                 _html.Div([
                     _dcc.Textarea(
-                        placeholder='Enter a value...',
-                        value=''.join(_qualifications.values()),
+                        id='qualifications',
+                        placeholder='Qualifications & Experience...',
+                        value='',
                         style={'width': '100%', 'height': '120px'}
                     )
                 ], style={'display': 'table-cell', 'width': '60%'}),
@@ -364,6 +360,53 @@ def _init_callbacks():
             return _dash.no_update
         else:
             return ''.join(_skills[skill] for skill in skills)
+
+    @_app.callback(_Output('duties', 'value'),
+                   [_Input('duty_selector', 'value')])
+    @_log_callback_exception()
+    def _change_area(duties):
+        if duties is None:
+            return _dash.no_update
+        else:
+            return ''.join(_duties[duty] for duty in duties)
+
+    @_app.callback(_Output('qualifications', 'value'),
+                   [_Input('qual_selector', 'value')])
+    @_log_callback_exception()
+    def _change_area(quals):
+        if quals is None:
+            return _dash.no_update
+        else:
+            return ''.join(_qualifications[qual] for qual in quals)
+
+    @_app.callback([_Output('duty_selector', 'options'),
+                    _Output('duty_selector', 'value'),
+                    _Output('skill_selector', 'options'),
+                    _Output('skill_selector', 'value'),
+                    _Output('qual_selector', 'options'),
+                    _Output('qual_selector', 'value')],
+                   [_Input('job_title', 'value')])
+    @_log_callback_exception(3)
+    def _change_area(job_title):
+        if job_title != 'Structures Foreman':
+            return [_dash.no_update] * 6
+        return [
+            [
+                {'label': duty, 'value': duty}
+                for duty in _duties.keys()
+            ],
+            list(_duties.keys()),
+            [
+                {'label': skill, 'value': skill}
+                for skill in list(_skills.keys())
+            ],
+            list(_skills.keys())[:2],
+            [
+                {'label': qual, 'value': qual}
+                for qual in _qualifications.keys()
+            ],
+            list(_qualifications.keys()),
+        ]
 
 
 category = 'Job Description Generator'

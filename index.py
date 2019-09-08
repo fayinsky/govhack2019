@@ -101,7 +101,7 @@ def _generate_nav():
             _dcc.Link(
                 _html.Img(
                     src='data:image/jpeg;base64,{}'.format(jinder_logo),
-                    height='50px',
+                    height='80px',
 
                 ),
                 href=_server.DASH_BASE_PATHNAME + 'index'
@@ -144,7 +144,7 @@ def _generate_nav():
             id='jinder-nav',
             style={'vertical-align': 'middle', 'display': 'inline-block'}
         ))
-    return _html.Div(navigation_bar, style={'height': '60px', 'background-color': 'rgb(255,255,255)'})
+    return _html.Div(navigation_bar, style={'height': '100px', 'background-color': 'rgb(255,255,255)'})
 
 
 def _generate_dash_index_page():
